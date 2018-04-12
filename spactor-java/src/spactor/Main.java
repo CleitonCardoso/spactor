@@ -59,11 +59,7 @@ public class Main {
 	}
 
 	private static Integer getNumberOfVerticesFromGroup(List<String> group) {
-		for (String line : group) {
-			if (line.length() == 1)
-				return Integer.valueOf( line );
-		}
-		throw new RuntimeException( "Um dos grupos não possui o número de vertices" );
+		return Integer.valueOf( group.get( 0 ) );
 	}
 
 	public static boolean isValid(int[][] matrix, int x, int y) {
@@ -72,7 +68,8 @@ public class Main {
 
 	private static int[][] getMatrixFromGroup(List<String> group, Integer numberOfVertices) {
 		int[][] matrix = new int[numberOfVertices][numberOfVertices];
-		List<String> rows = group.stream().filter( line -> line.length() > 3 ).collect( Collectors.toList() );
+		List<String> rows = group.stream().filter( line -> line.split( " " ).length > 2 )
+				.collect( Collectors.toList() );
 		// x => número da linha
 		for (int x = 0; x < rows.size(); x++) {
 			String row = rows.get( x );
